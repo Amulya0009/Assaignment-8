@@ -1,0 +1,38 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
+package com.crackerBarrel;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solver {
+    public Solver() {
+    }
+
+    public static List<Moves> solve(Boards pegboard) {
+        if (pegboard.getScore() == 14) {
+            return new ArrayList();
+        } else {
+            Moves[] var1 = Moves.moves;
+            int var2 = var1.length;
+
+            for(int var3 = 0; var3 < var2; ++var3) {
+                Moves move = var1[var3];
+                if (pegboard.canApplyMove(move)) {
+                    Boards nextBoard = new Boards(pegboard);
+                    nextBoard.applyMove(move);
+                    List<Moves> otherMoves = solve(nextBoard);
+                    if (otherMoves != null) {
+                        otherMoves.add(0, move);
+                        return otherMoves;
+                    }
+                }
+            }
+
+            return null;
+        }
+    }
+}

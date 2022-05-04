@@ -1,0 +1,38 @@
+package com.crackerBarrel;
+
+import java.util.List;
+
+public class Main {
+
+    public static void main(String[] args) {
+	// write your code here
+
+
+        Boards board = new Boards();
+        System.out.println(board.toTriangle());
+
+        // The first 5 solutions are all that you need.
+        // All teh other configurations are just these solutions with a 1/3 rotation
+        for (int i = 0; i < 5; i++) {
+
+            Boards boards = new Boards(i);
+            List<Moves> pegMoves = Solver.solve(boards);
+
+            // Initial state
+            System.out.println("=========");
+            System.out.println("=========");
+            System.out.println();
+            System.out.println("Option " + i + ":");
+            System.out.println(boards.toTriangle());
+
+            // Print the state of the pegboard after each move
+            for (Moves move : pegMoves) {
+                boards.applyMove(move);
+
+                System.out.println();
+                System.out.println(move.toString());
+                System.out.println(boards.toTriangle());
+            }
+        }
+    }
+}
